@@ -40,7 +40,8 @@ public:
     
     std::map<utility::string_t, utility::string_t>& getHeaders();
     std::shared_ptr<std::istream> getContent() const;
-        
+ 	const utility::string_t& getRequestId() const;
+
 protected:
 	utility::string_t m_RequestId;
     std::shared_ptr<std::istream> m_Content;    

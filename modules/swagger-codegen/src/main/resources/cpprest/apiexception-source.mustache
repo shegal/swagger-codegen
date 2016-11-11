@@ -45,7 +45,7 @@ std::map<utility::string_t, utility::string_t>& ApiException::getHeaders()
     return m_Headers;
 }
 
-const utility::string_t& ApiException::getRequestId()
+const utility::string_t& ApiException::getRequestId() const
 {
 	return m_RequestId;
 }
