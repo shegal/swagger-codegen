@@ -205,9 +205,20 @@ pplx::task<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/r
         // 5xx - client error  : not OK
         if (response.status_code() >= 400)
         {
-            throw ApiException(response.status_code()
-                , U("error calling {{operationId}}: ") + response.reason_phrase()
-                , std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			// check if there is optional X-Request-ID
+			if (response.headers().has(U("X-Request-ID")))
+			{
+            	throw ApiException(response.status_code()
+					, response.headers()[U("X-Request-ID")]
+                	, U("error calling {{operationId}}: ") + response.reason_phrase()
+                	, std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			}
+			else
+			{
+            	throw ApiException(response.status_code()
+                	, U("error calling {{operationId}}: ") + response.reason_phrase()
+                	, std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			}
         }
         
         // check response content type

@@ -12,6 +12,15 @@ ApiException::ApiException( int errorCode
     , m_Content(content)
 {
 }
+AApiException::ApiException( int errorCode
+	, const utility::string_t& requestId,
+    , const utility::string_t& message
+    , std::shared_ptr<std::istream> content /*= nullptr*/ )
+    : web::http::http_exception( errorCode, message )
+    , m_Content(content)
+	, m_RequestId(requestId)
+{
+}
 ApiException::ApiException( int errorCode
     , const utility::string_t& message
     , std::map<utility::string_t, utility::string_t>& headers
@@ -34,6 +43,11 @@ std::shared_ptr<std::istream> ApiException::getContent() const
 std::map<utility::string_t, utility::string_t>& ApiException::getHeaders()
 {
     return m_Headers;
+}
+
+const utility::string_t& ApiException::getRequestId()
+{
+	return m_RequestId;
 }
 
 {{#apiNamespaceDeclarations}}

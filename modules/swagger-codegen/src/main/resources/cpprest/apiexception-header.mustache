@@ -29,6 +29,10 @@ public:
         , const utility::string_t& message
         , std::shared_ptr<std::istream> content = nullptr );
     ApiException( int errorCode
+		, const utility::string_t& requestId
+        , const utility::string_t& message
+        , std::shared_ptr<std::istream> content = nullptr );
+    ApiException( int errorCode
         , const utility::string_t& message
         , std::map<utility::string_t, utility::string_t>& headers
         , std::shared_ptr<std::istream> content = nullptr );
@@ -38,6 +42,7 @@ public:
     std::shared_ptr<std::istream> getContent() const;
         
 protected:
+	utility::string_t m_RequestId;
     std::shared_ptr<std::istream> m_Content;    
     std::map<utility::string_t, utility::string_t> m_Headers;
 };
