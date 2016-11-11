@@ -590,9 +590,9 @@ paths:
       descriptions: To test enum parameters
       operationId: testEnumParameters
       consumes:
-        - application/json
+        - "*/*"
       produces:
-        - application/json
+        - "*/*"
       parameters:
         - name: enum_form_string_array
           type: array
@@ -769,6 +769,10 @@ paths:
           format: password
           maxLength: 64
           minLength: 10
+          in: formData
+          description: None
+        - name: callback
+          type: string
           in: formData
           description: None
       responses:
