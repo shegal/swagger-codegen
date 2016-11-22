@@ -225,7 +225,7 @@ pplx::task<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/r
         if(response.headers().has(U("Content-Type")))
         {
             utility::string_t contentType = response.headers()[U("Content-Type")];
-            if( contentType.find(responseHttpContentType) == std::string::npos )
+            if(contentType.find(responseHttpContentType) == std::string::npos )
             {
                 throw ApiException(500
                     , U("error calling {{operationId}}: unexpected response type: ") + contentType
@@ -285,7 +285,7 @@ pplx::task<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/r
         else 
         {
             throw ApiException(500
-                , U("error calling findPetsByStatus: unsupported response type"));
+                , U("error calling {{operationId}}: unsupported response type"));
         }
         
         return result;
