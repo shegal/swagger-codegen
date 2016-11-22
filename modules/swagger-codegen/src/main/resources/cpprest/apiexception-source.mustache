@@ -12,13 +12,13 @@ ApiException::ApiException( int errorCode
     , m_Content(content)
 {
 }
-AApiException::ApiException( int errorCode
-	, const utility::string_t& requestId,
+ApiException::ApiException( int errorCode
+    , const utility::string_t& requestId
     , const utility::string_t& message
     , std::shared_ptr<std::istream> content /*= nullptr*/ )
     : web::http::http_exception( errorCode, message )
     , m_Content(content)
-	, m_RequestId(requestId)
+    , m_RequestId(requestId)
 {
 }
 ApiException::ApiException( int errorCode
