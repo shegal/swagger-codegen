@@ -264,7 +264,7 @@ int32_t ModelBase::int32_tFromJson(web::json::value& val)
 }
 utility::string_t ModelBase::stringFromJson(web::json::value& val)
 {
-    return val.is_string() ? val.as_string() : U("");
+    return val.is_string() ? val.as_string() : val.serialize();
 }
 
 utility::datetime ModelBase::dateFromJson(web::json::value& val)
