@@ -5,9 +5,9 @@
 #include <boost/uuid/random_generator.hpp>
 #include <boost/uuid/uuid_io.hpp> 
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 namespace {{this}} {
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 MultipartFormData::MultipartFormData()
 {
@@ -95,6 +95,6 @@ void MultipartFormData::writeTo( std::ostream& target )
     target << "\r\n--" << utility::conversions::to_utf8string( m_Boundary ) << "--\r\n";
 }
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 }
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}

@@ -13,9 +13,9 @@
 
 #include <cpprest/json.h> 
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 namespace {{this}} {
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 class {{declspec}} JsonBody
     : public IHttpBody
@@ -30,8 +30,8 @@ protected:
     web::json::value m_Json;
 };
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 }
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 #endif /* JsonBody_H_ */

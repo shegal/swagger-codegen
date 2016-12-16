@@ -20,11 +20,10 @@
 #include <cpprest/details/basic_types.h>
 #include <cpprest/http_client.h>
 
-{{#apiNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 namespace {{this}} {
-{{/apiNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
-using namespace {{modelNamespace}};
 
 class {{declspec}} ApiClient
 {
@@ -57,10 +56,10 @@ public:
         const utility::string_t& path, 
         const utility::string_t& method, 
         const std::map<utility::string_t, utility::string_t>& queryParams, 
-        const std::shared_ptr<IHttpBody> postBody, 
+        const std::shared_ptr<{{invokerNamespace}}::IHttpBody> postBody, 
         const std::map<utility::string_t, utility::string_t>& headerParams, 
         const std::map<utility::string_t, utility::string_t>& formParams, 
-        const std::map<utility::string_t, std::shared_ptr<HttpContent>>& fileParams,
+        const std::map<utility::string_t, std::shared_ptr<{{invokerNamespace}}::HttpContent>>& fileParams,
         const utility::string_t& contentType
     ) const;
     
@@ -69,8 +68,8 @@ protected:
     std::shared_ptr<ApiConfiguration> m_Configuration;
 };
 
-{{#apiNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 }
-{{/apiNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 #endif /* ApiClient_H_ */

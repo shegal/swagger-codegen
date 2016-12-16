@@ -15,9 +15,9 @@
 #include <cpprest/details/basic_types.h>
 #include <cpprest/json.h> 
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 namespace {{this}} {
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 class {{declspec}} ModelBase
 {
@@ -70,8 +70,8 @@ public:
     static std::shared_ptr<std::istream> fromBase64( const utility::string_t& encoded );
 };
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 }
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 #endif /* ModelBase_H_ */

@@ -15,10 +15,12 @@ public class CppRestClientCodegen extends DefaultCodegen implements CodegenConfi
 
     public static final String DECLSPEC = "declspec";
     public static final String DEFAULT_INCLUDE = "defaultInclude";
+    public static final String INVOKER_PACKAGE = "invokerPackage";
 
     protected String packageVersion = "1.0.0";
     protected String declspec = "";
     protected String defaultInclude = "";
+    protected String invokerPackage = "";
 
     /**
      * Configures the type of generator.
@@ -55,6 +57,7 @@ public class CppRestClientCodegen extends DefaultCodegen implements CodegenConfi
 
         apiPackage = "io.swagger.client.api";
         modelPackage = "io.swagger.client.model";
+	invokerPackage = "io.swagger.client.core";
 
         modelTemplateFiles.put("model-header.mustache", ".h");
         modelTemplateFiles.put("model-source.mustache", ".cpp");
@@ -71,6 +74,8 @@ public class CppRestClientCodegen extends DefaultCodegen implements CodegenConfi
                 this.modelPackage);
         addOption(CodegenConstants.API_PACKAGE, "C++ namespace for apis (convention: name.space.api).",
                 this.apiPackage);
+        addOption(CodegenConstants.INVOKER_PACKAGE, "C++ namespace for common code (convention: name.space.core).",
+                this.invokerPackage);
         addOption(CodegenConstants.PACKAGE_VERSION, "C++ package version.", this.packageVersion);
         addOption(DECLSPEC, "C++ preprocessor to place before the class name for handling dllexport/dllimport.",
                 this.declspec);
@@ -143,10 +148,16 @@ public class CppRestClientCodegen extends DefaultCodegen implements CodegenConfi
             defaultInclude = additionalProperties.get(DEFAULT_INCLUDE).toString();
         }
 
+        if (additionalProperties.containsKey(INVOKER_PACKAGE)) {
+            invokerPackage = additionalProperties.get(INVOKER_PACKAGE).toString();
+        }
+
         additionalProperties.put("modelNamespaceDeclarations", modelPackage.split("\\."));
         additionalProperties.put("modelNamespace", modelPackage.replaceAll("\\.", "::"));
         additionalProperties.put("apiNamespaceDeclarations", apiPackage.split("\\."));
         additionalProperties.put("apiNamespace", apiPackage.replaceAll("\\.", "::"));
+        additionalProperties.put("invokerNamespaceDeclarations", invokerPackage.split("\\."));
+        additionalProperties.put("invokerNamespace", invokerPackage.replaceAll("\\.", "::"));
         additionalProperties.put("declspec", declspec);
         additionalProperties.put("defaultInclude", defaultInclude);
     }
@@ -185,7 +196,7 @@ public class CppRestClientCodegen extends DefaultCodegen implements CodegenConfi
         if (importMapping.containsKey(name)) {
             return importMapping.get(name);
         } else {
-            return "#include \"" + name + ".h\"";
+            return "#include \"../model/" + name + ".h\"";
         }
     }
 
@@ -277,7 +288,7 @@ public class CppRestClientCodegen extends DefaultCodegen implements CodegenConfi
             return toModelName(swaggerType);
         }
 
-        return "std::shared_ptr<" + swaggerType + ">";
+        return "std::shared_ptr<" + modelPackage.replaceAll("\\.", "::") + "::" + swaggerType + ">";
     }
 
     @Override
@@ -327,7 +338,7 @@ public class CppRestClientCodegen extends DefaultCodegen implements CodegenConfi
         boolean isString = parameter.isString == Boolean.TRUE;
 
         if (!isPrimitiveType && !isListContainer && !isString && !parameter.dataType.startsWith("std::shared_ptr")) {
-            parameter.dataType = "std::shared_ptr<" + parameter.dataType + ">";
+            parameter.dataType = "std::shared_ptr<" + modelPackage.replaceAll("\\.", "::") + "::" + parameter.dataType + ">";
         }
     }
 

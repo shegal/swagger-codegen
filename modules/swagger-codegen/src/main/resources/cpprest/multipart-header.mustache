@@ -19,9 +19,9 @@
 #include <cpprest/details/basic_types.h>
 
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 namespace {{this}} {
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 class {{declspec}} MultipartFormData
     : public IHttpBody
@@ -43,8 +43,8 @@ protected:
     std::map<utility::string_t, std::shared_ptr<HttpContent>> m_ContentLookup;
 };
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 }
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 #endif /* MultipartFormData_H_ */

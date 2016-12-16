@@ -1,9 +1,9 @@
 {{>licenseInfo}}
 #include "HttpContent.h"
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 namespace {{this}} {
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 HttpContent::HttpContent()
 {
@@ -69,6 +69,6 @@ void HttpContent::writeTo( std::ostream& stream )
     stream << m_Data->rdbuf();
 }
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 }
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}

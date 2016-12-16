@@ -1,9 +1,9 @@
 {{>licenseInfo}}
 #include "ApiConfiguration.h"
 
-{{#apiNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 namespace {{this}} {
-{{/apiNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 ApiConfiguration::ApiConfiguration()
 {
@@ -63,6 +63,6 @@ void ApiConfiguration::setApiKey( const utility::string_t& prefix, const utility
     m_ApiKeys[prefix] = apiKey;
 }
 
-{{#apiNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 }
-{{/apiNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}

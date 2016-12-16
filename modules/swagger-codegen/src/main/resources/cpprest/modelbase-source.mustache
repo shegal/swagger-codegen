@@ -1,9 +1,9 @@
 {{>licenseInfo}}
 #include "ModelBase.h"
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 namespace {{this}} {
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 ModelBase::ModelBase()
 {
@@ -333,6 +333,6 @@ double ModelBase::doubleFromHttpContent(std::shared_ptr<HttpContent> val)
     return result;
 }
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 }
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}

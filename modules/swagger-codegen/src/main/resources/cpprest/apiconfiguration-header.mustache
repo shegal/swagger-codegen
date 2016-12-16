@@ -14,9 +14,9 @@
 
 #include <cpprest/details/basic_types.h> 
 #include <cpprest/http_client.h>
-{{#apiNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 namespace {{this}} {
-{{/apiNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 class {{declspec}} ApiConfiguration
 {
@@ -46,7 +46,7 @@ protected:
     utility::string_t m_UserAgent;    
 };
 
-{{#apiNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 }
-{{/apiNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 #endif /* ApiConfiguration_H_ */

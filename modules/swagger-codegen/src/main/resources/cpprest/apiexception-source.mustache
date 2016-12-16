@@ -1,9 +1,9 @@
 {{>licenseInfo}}
 #include "ApiException.h"
 
-{{#apiNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 namespace {{this}} {
-{{/apiNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 ApiException::ApiException( int errorCode
     , const utility::string_t& message
@@ -50,6 +50,6 @@ const utility::string_t& ApiException::getRequestId() const
 	return m_RequestId;
 }
 
-{{#apiNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 }
-{{/apiNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}

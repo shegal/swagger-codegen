@@ -11,9 +11,9 @@
 {{{defaultInclude}}}
 #include <iostream>
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 namespace {{this}} {
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 class {{declspec}} IHttpBody
 {
@@ -23,8 +23,8 @@ public:
     virtual void writeTo( std::ostream& stream ) = 0;
 };
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 }
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 #endif /* IHttpBody_H_ */

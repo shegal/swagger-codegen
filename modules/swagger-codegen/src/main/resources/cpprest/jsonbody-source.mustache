@@ -1,9 +1,9 @@
 {{>licenseInfo}}
 #include "JsonBody.h"
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 namespace {{this}} {
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 JsonBody::JsonBody( const web::json::value& json)
     : m_Json(json)
@@ -19,6 +19,6 @@ void JsonBody::writeTo( std::ostream& target )
     m_Json.serialize(target);
 }
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 }
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}

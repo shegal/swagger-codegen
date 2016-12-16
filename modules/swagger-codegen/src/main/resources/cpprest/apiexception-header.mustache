@@ -17,9 +17,9 @@
 #include <cpprest/http_msg.h>
 
 
-{{#apiNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 namespace {{this}} {
-{{/apiNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 class {{declspec}} ApiException
     : public web::http::http_exception
@@ -48,8 +48,8 @@ protected:
     std::map<utility::string_t, utility::string_t> m_Headers;
 };
 
-{{#apiNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 }
-{{/apiNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 #endif /* ApiBase_H_ */

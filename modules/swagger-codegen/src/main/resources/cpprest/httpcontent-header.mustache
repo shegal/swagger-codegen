@@ -14,9 +14,9 @@
 
 #include <cpprest/details/basic_types.h> 
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 namespace {{this}} {
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 class {{declspec}} HttpContent
 {
@@ -50,8 +50,8 @@ protected:
     std::shared_ptr<std::istream> m_Data;
 };
 
-{{#modelNamespaceDeclarations}}
+{{#invokerNamespaceDeclarations}}
 }
-{{/modelNamespaceDeclarations}}
+{{/invokerNamespaceDeclarations}}
 
 #endif /* HttpContent_H_ */
