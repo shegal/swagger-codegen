@@ -3,6 +3,25 @@
 #include "MultipartFormData.h"
 #include "ModelBase.h"
 
+// Linux link fix
+
+#ifndef _WIN32
+namespace web {
+namespace http {
+#define _METHODS
+#define DAT(a,b) const method methods::a = b;
+#include <cpprest/details/http_constants.dat>
+#undef _METHODS
+#undef DAT
+
+#define _HEADER_NAMES
+#define DAT(a,b) const utility::string_t header_names::a = _XPLATSTR(b);
+#include <cpprest/details/http_constants.dat>
+#undef _HEADER_NAMES
+#undef DAT
+}} // namespace web::http
+#endif // _WIN32
+
 {{#invokerNamespaceDeclarations}}
 namespace {{this}} {
 {{/invokerNamespaceDeclarations}}
