@@ -294,7 +294,7 @@ public class CppRestClientCodegen extends DefaultCodegen implements CodegenConfi
     @Override
     public String toDefaultValue(Property p) {
         if (p instanceof StringProperty) {
-            return "U(\"\")";
+            return "URI(\"\")";
         } else if (p instanceof BooleanProperty) {
             return "false";
         } else if (p instanceof DateProperty) {

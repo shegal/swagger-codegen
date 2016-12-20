@@ -36,10 +36,10 @@ web::json::value ModelBase::toJson( double value )
 web::json::value ModelBase::toJson( std::shared_ptr<HttpContent> content )
 {
     web::json::value value;
-    value[U("ContentDisposition")] = ModelBase::toJson(content->getContentDisposition());
-    value[U("ContentType")] = ModelBase::toJson(content->getContentType());
-    value[U("FileName")] = ModelBase::toJson(content->getFileName());
-    value[U("InputStream")] = web::json::value::string( ModelBase::toBase64(content->getData()) );
+    value[URI("ContentDisposition")] = ModelBase::toJson(content->getContentDisposition());
+    value[URI("ContentType")] = ModelBase::toJson(content->getContentType());
+    value[URI("FileName")] = ModelBase::toJson(content->getFileName());
+    value[URI("InputStream")] = web::json::value::string( ModelBase::toBase64(content->getData()) );
     return value;
 }
 
@@ -47,21 +47,21 @@ std::shared_ptr<HttpContent> ModelBase::fileFromJson(web::json::value& val)
 {
     std::shared_ptr<HttpContent> content(new HttpContent);
     
-    if(val.has_field(U("ContentDisposition")))
+    if(val.has_field(URI("ContentDisposition")))
     {
-        content->setContentDisposition( ModelBase::stringFromJson(val[U("ContentDisposition")]) );
+        content->setContentDisposition( ModelBase::stringFromJson(val[URI("ContentDisposition")]) );
     }
-    if(val.has_field(U("ContentType")))
+    if(val.has_field(URI("ContentType")))
     {
-        content->setContentType( ModelBase::stringFromJson(val[U("ContentType")]) );
+        content->setContentType( ModelBase::stringFromJson(val[URI("ContentType")]) );
     }
-    if(val.has_field(U("FileName")))
+    if(val.has_field(URI("FileName")))
     {
-        content->setFileName( ModelBase::stringFromJson(val[U("FileName")]) );
+        content->setFileName( ModelBase::stringFromJson(val[URI("FileName")]) );
     }
-    if(val.has_field(U("InputStream")))
+    if(val.has_field(URI("InputStream")))
     {
-        content->setData( ModelBase::fromBase64( ModelBase::stringFromJson(val[U("InputStream")]) ) );
+        content->setData( ModelBase::fromBase64( ModelBase::stringFromJson(val[URI("InputStream")]) ) );
     }
 
     return content;
@@ -76,7 +76,7 @@ std::shared_ptr<HttpContent> ModelBase::toHttpContent( const utility::string_t& 
 {
     std::shared_ptr<HttpContent> content(new HttpContent);
     content->setName( name );
-    content->setContentDisposition( U("form-data") );
+    content->setContentDisposition( URI("form-data") );
     content->setContentType( contentType );
     content->setData( std::shared_ptr<std::istream>( new std::stringstream( utility::conversions::to_utf8string(value) ) ) );
     return content;
@@ -85,7 +85,7 @@ std::shared_ptr<HttpContent> ModelBase::toHttpContent( const utility::string_t& 
 {
     std::shared_ptr<HttpContent> content( new HttpContent );
     content->setName( name );
-    content->setContentDisposition( U("form-data") );
+    content->setContentDisposition( URI("form-data") );
     content->setContentType( contentType );
     content->setData( std::shared_ptr<std::istream>( new std::stringstream( utility::conversions::to_utf8string(value.to_string(utility::datetime::ISO_8601) ) ) ) );
     return content;
@@ -104,7 +104,7 @@ std::shared_ptr<HttpContent> ModelBase::toHttpContent( const utility::string_t& 
 {
     std::shared_ptr<HttpContent> content( new HttpContent );
     content->setName( name );
-    content->setContentDisposition( U("form-data") );
+    content->setContentDisposition( URI("form-data") );
     content->setContentType( contentType );
     content->setData( std::shared_ptr<std::istream>( new std::stringstream( utility::conversions::to_utf8string(value.serialize()) ) ) );
     return content;
@@ -113,7 +113,7 @@ std::shared_ptr<HttpContent> ModelBase::toHttpContent( const utility::string_t& 
 {
     std::shared_ptr<HttpContent> content( new HttpContent );
     content->setName( name );
-    content->setContentDisposition( U("form-data") );
+    content->setContentDisposition( URI("form-data") );
     content->setContentType( contentType );
     content->setData( std::shared_ptr<std::istream>( new std::stringstream( std::to_string( value ) ) ) );
     return content;
@@ -122,7 +122,7 @@ std::shared_ptr<HttpContent> ModelBase::toHttpContent( const utility::string_t& 
 {
     std::shared_ptr<HttpContent> content( new HttpContent );
     content->setName( name );
-    content->setContentDisposition( U("form-data") );
+    content->setContentDisposition( URI("form-data") );
     content->setContentType( contentType );
     content->setData( std::shared_ptr<std::istream>( new std::stringstream( std::to_string( value ) ) ) );
     return content;
@@ -131,7 +131,7 @@ std::shared_ptr<HttpContent> ModelBase::toHttpContent( const utility::string_t& 
 {
     std::shared_ptr<HttpContent> content( new HttpContent );
     content->setName( name );
-    content->setContentDisposition( U("form-data") );
+    content->setContentDisposition( URI("form-data") );
     content->setContentType( contentType );
     content->setData( std::shared_ptr<std::istream>( new std::stringstream( std::to_string( value ) ) ) );
     return content;
@@ -235,12 +235,12 @@ std::shared_ptr<std::istream> ModelBase::fromBase64( const utility::string_t& en
                         result->write( outBuf, 1 );
                         return result;
                     default:
-                        throw web::json::json_exception( U( "Invalid Padding in Base 64!" ) );
+                        throw web::json::json_exception( URI( "Invalid Padding in Base 64!" ) );
                 }
             }
             else
             {
-                throw web::json::json_exception( U( "Non-Valid Character in Base 64!" ) );
+                throw web::json::json_exception( URI( "Non-Valid Character in Base 64!" ) );
             }
             ++cursor;
         }

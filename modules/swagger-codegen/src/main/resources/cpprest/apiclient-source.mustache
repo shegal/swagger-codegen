@@ -3,25 +3,6 @@
 #include "MultipartFormData.h"
 #include "ModelBase.h"
 
-// Linux link fix
-
-#ifndef _WIN32
-namespace web {
-namespace http {
-#define _METHODS
-#define DAT(a,b) const method methods::a = b;
-#include <cpprest/details/http_constants.dat>
-#undef _METHODS
-#undef DAT
-
-#define _HEADER_NAMES
-#define DAT(a,b) const utility::string_t header_names::a = _XPLATSTR(b);
-#include <cpprest/details/http_constants.dat>
-#undef _HEADER_NAMES
-#undef DAT
-}} // namespace web::http
-#endif // _WIN32
-
 {{#invokerNamespaceDeclarations}}
 namespace {{this}} {
 {{/invokerNamespaceDeclarations}}
@@ -72,17 +53,17 @@ pplx::task<web::http::http_response> ApiClient::callApi(
 {
 	if (postBody != nullptr && formParams.size() != 0)
 	{
-		throw ApiException(400, U("Cannot have body and form params"));
+		throw ApiException(400, URI("Cannot have body and form params"));
 	}
 
 	if (postBody != nullptr && fileParams.size() != 0)
 	{
-		throw ApiException(400, U("Cannot have body and file params"));
+		throw ApiException(400, URI("Cannot have body and file params"));
 	}
 
-	if (fileParams.size() > 0 && contentType != U("multipart/form-data"))
+	if (fileParams.size() > 0 && contentType != URI("multipart/form-data"))
 	{
-		throw ApiException(400, U("Operations with file parameters must be called with multipart/form-data"));
+		throw ApiException(400, URI("Operations with file parameters must be called with multipart/form-data"));
 	}
 
 	web::http::client::http_client client(m_Configuration->getBaseUrl(), m_Configuration->getHttpConfig());
@@ -127,7 +108,7 @@ pplx::task<web::http::http_response> ApiClient::callApi(
 			{
 				formData.append_query(kvp.first, kvp.second);
 			}
-			request.set_body(formData.query(), U("application/x-www-form-urlencoded"));
+			request.set_body(formData.query(), URI("application/x-www-form-urlencoded"));
 		}
 	}
 
